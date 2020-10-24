@@ -172,7 +172,17 @@ def search_venues():
 def show_venue(venue_id):
   data = Venue.query.filter_by(id=venue_id).first()
   data.genres = json.loads(data.genres)
-  
+
+  upcoming_shows = []
+  past_shows = []
+  for show in data.shows:
+    if show.date > datetime.now():
+      upcoming_shows.append(show)
+    else:
+      past_shows.append(show)
+  data.upcoming_shows = upcoming_shows
+  data.past_shows = past_shows
+
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue
@@ -262,7 +272,17 @@ def search_artists():
 def show_artist(artist_id):
   data = Artist.query.filter_by(id=artist_id).first()
   data.genres = json.loads(data.genres)
-  
+
+  upcoming_shows = []
+  past_shows = []
+  for show in data.shows:
+    if show.date > datetime.now():
+      upcoming_shows.append(show)
+    else:
+      past_shows.append(show)
+  data.upcoming_shows = upcoming_shows
+  data.past_shows = past_shows
+
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update
