@@ -25,7 +25,7 @@ app = Flask(__name__)
 moment = Moment(app)
 app.config.from_object('config')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:123456@localhost:5432/fyyur'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'database://user:password@port:number/nameDB'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -141,7 +141,7 @@ def venues():
     v = {
         "id": venue.id,
         "name": venue.name,
-        "num_upcoming_shows": 4,
+        "num_upcoming_shows": 4
       }
     area_item['venues'].append(v)
     areas[pos_area] = area_item
